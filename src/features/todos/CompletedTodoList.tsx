@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { completedTodo } from "./todosSlice";
+import { completedTodo, removeTodo } from "./todosSlice";
 
 function CompletedTodoList() {
   const todos = useAppSelector((state) => state.todos);
@@ -8,6 +8,10 @@ function CompletedTodoList() {
 
   const handleClick = (e: any) => {
     dispatch(completedTodo({ id: e.target.name }));
+  };
+
+  const handleRemove = (e: any) => {
+    dispatch(removeTodo({ id: e.target.name }));
   };
 
   return (
@@ -29,12 +33,16 @@ function CompletedTodoList() {
                     onChange={handleClick}
                   />
                 </label>
-                <button>
+                <button
+                  className="transition ease-in-out hover:scale-110"
+                  name={`${i}`}
+                  onClick={handleRemove}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-5 h-5"
+                    className="w-5 h-5 pointer-events-none"
                   >
                     <path
                       fillRule="evenodd"

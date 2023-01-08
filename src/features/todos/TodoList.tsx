@@ -51,6 +51,7 @@ function TodoList() {
   };
 
   const handleRemove = (e: any) => {
+    console.log(e.target.name);
     dispatch(removeTodo({ id: e.target.name }));
   };
 
@@ -61,7 +62,7 @@ function TodoList() {
         {todos?.map((e, i) =>
           e.completed === false ? (
             <div className="flex justify-between items-center my-2" key={i}>
-              <div className="flex items-center gap-2">
+              <div className="flex justify-start items-center gap-2">
                 {toggleEdit[i]?.toggle === false ? (
                   <>
                     <p>{e?.task}</p>

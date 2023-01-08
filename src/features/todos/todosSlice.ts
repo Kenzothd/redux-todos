@@ -43,7 +43,7 @@ export const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      return [...state, action.payload];
+      state.push(action.payload);
     },
     editTodo: (state, action) => {
       const { id, task } = action.payload;
@@ -54,14 +54,11 @@ export const todosSlice = createSlice({
     },
     removeTodo: (state, action) => {
       const { id } = action.payload;
-      return state.filter((task) => task.id !== Number(id));
+      state.splice(id, 1);
     },
     completedTodo: (state, action) => {
       const { id } = action.payload;
-      const existingTodo = state.find((task) => task.id === Number(id));
-      if (existingTodo) {
-        existingTodo.completed = !existingTodo.completed;
-      }
+      state[id].completed = !state[id].completed;
     },
   },
 });
