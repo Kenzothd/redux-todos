@@ -58,13 +58,10 @@ export const todosSlice = createSlice({
     },
     completedTodo: (state, action) => {
       const { id } = action.payload;
-      console.log("id", typeof id);
       const existingTodo = state.find((task) => task.id === Number(id));
       if (existingTodo) {
         existingTodo.completed = !existingTodo.completed;
       }
-      console.log("state", original(state));
-      console.log("state", current(state));
     },
   },
 });

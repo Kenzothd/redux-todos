@@ -7,7 +7,6 @@ function CompletedTodoList() {
   const dispatch = useAppDispatch();
 
   const handleClick = (e: any) => {
-    console.log(e.target.name);
     dispatch(completedTodo({ id: e.target.name }));
   };
 

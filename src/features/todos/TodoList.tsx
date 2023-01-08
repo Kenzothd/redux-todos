@@ -1,4 +1,4 @@
-import { useRef, useState, useLayoutEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   completedTodo,
@@ -15,8 +15,11 @@ function TodoList() {
     todos.map((e) => ({ value: e.task, toggle: false }))
   );
 
+  useEffect(() => {
+    setToggleEdit(todos.map((e) => ({ value: e.task, toggle: false })));
+  }, [todos]);
+
   const handleComplete = (e: any) => {
-    console.log(e.target.name);
     dispatch(completedTodo({ id: e.target.name }));
   };
 
@@ -41,8 +44,8 @@ function TodoList() {
     let i = e.target.name;
     let newArray = [...toggleEdit];
     newArray[i].toggle = false;
-    (toggleEdit[i].value = todos[i].task), setToggleEdit(newArray);
-    console.log(toggleEdit[i]);
+    toggleEdit[i].value = todos[i].task;
+    setToggleEdit(newArray);
   };
 
   const handleRemove = (e: any) => {
@@ -53,13 +56,13 @@ function TodoList() {
     <div>
       <h2 className="font-bold text-center">Todo List</h2>
       <div className="mx-60">
-        {todos.map((e, i) =>
+        {todos?.map((e, i) =>
           e.completed === false ? (
             <div className="flex justify-between items-center my-2" key={i}>
               <div className="flex items-center gap-2">
-                {toggleEdit[i].toggle === false ? (
+                {toggleEdit[i]?.toggle === false ? (
                   <>
-                    <p>{e.task}</p>
+                    <p>{e?.task}</p>
                     <button
                       name={`${i}`}
                       className="transition ease-in-out hover:scale-125"
@@ -81,7 +84,7 @@ function TodoList() {
                     <input
                       type="text"
                       ref={inputValue}
-                      value={toggleEdit[i].value}
+                      value={toggleEdit[i]?.value}
                       name={`${i}`}
                       onChange={handleOnChange}
                       className="border rounded border-black p-0.5"
