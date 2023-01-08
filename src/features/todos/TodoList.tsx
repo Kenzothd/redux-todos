@@ -35,6 +35,7 @@ function TodoList() {
     if (toggleEdit[i].toggle) {
       dispatch(editTodo({ id: i, task: inputValue.current?.value }));
     }
+    // Set toggle to true/false
     let newArray = [...toggleEdit];
     newArray[i].toggle = !newArray[i].toggle;
     setToggleEdit(newArray);
@@ -43,7 +44,8 @@ function TodoList() {
   const handleCancleEdit = (e: any) => {
     let i = e.target.name;
     let newArray = [...toggleEdit];
-    newArray[i].toggle = false;
+    //Reassign toggle to false and value of task back to default state
+    newArray[i].toggle = !newArray[i].toggle;
     toggleEdit[i].value = todos[i].task;
     setToggleEdit(newArray);
   };
@@ -54,8 +56,8 @@ function TodoList() {
 
   return (
     <div>
-      <h2 className="font-bold text-center">Todo List</h2>
-      <div className="mx-60">
+      <h2 className="font-bold text-center ">Todo List</h2>
+      <div className="mx-40">
         {todos?.map((e, i) =>
           e.completed === false ? (
             <div className="flex justify-between items-center my-2" key={i}>

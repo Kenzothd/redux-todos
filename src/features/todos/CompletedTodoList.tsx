@@ -13,7 +13,7 @@ function CompletedTodoList() {
   return (
     <div>
       <h2 className="font-bold text-center">Completed List</h2>
-      <div className="mx-60">
+      <div className="mx-40">
         {todos.map((e, i) =>
           e.completed === true ? (
             <div className="flex justify-between items-center" key={i}>
